@@ -10,7 +10,12 @@ if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET) {
   throw new Error("GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET must be provided");
 }
 
-export const { handlers: { GET, POST }, auth, signOut, signIn } = NextAuth ({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signOut,
+  signIn,
+} = NextAuth({
   adapter: PrismaAdapter(db),
   providers: [
     github({
@@ -19,10 +24,12 @@ export const { handlers: { GET, POST }, auth, signOut, signIn } = NextAuth ({
     }),
   ],
   callbacks: {
+    // This just allows us to get the users id
     async session({ session, user }: any) {
       if (session && user) {
-         session.user.id = user.id;
-    }
-    return session;
-  }
-})
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
+});
