@@ -21,6 +21,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="container mx-auto px-4 max-w-6xl">
           <Providers>
+            {/* This will be shown on every page in our app */}
+            {/* Every page displaying the header will be dynamic because the header is accessing cookies */}
             <Header />
             {children}
           </Providers>
