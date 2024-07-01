@@ -30,6 +30,8 @@ export async function createTopic(
   formState: CreateTopicFormState,
   formData: FormData
 ): Promise<CreateTopicFormState> {
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+
   const result = createTopicSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description"),
@@ -74,7 +76,7 @@ export async function createTopic(
     }
   }
 
-  // TODO: revalidate the homepage after creating a topic
+  // revalidate the homepage after creating a topic
   revalidatePath("/");
   redirect(paths.topicShow(topic.slug));
 }
