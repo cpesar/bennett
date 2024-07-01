@@ -12,6 +12,7 @@ export default function FormButton({ children }: FormButtonProps) {
 
   return (
     <Button type="submit" isLoading={pending}>
+      {/* Any valid React node can be passed as children to the FormButton component. */}
       {children}
     </Button>
   );
